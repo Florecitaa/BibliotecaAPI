@@ -34,17 +34,38 @@ namespace BibliotecaAPI.Controllers
             }
             return Ok(usuario);
         }
+        //[HttpPost("validar")]
+        //public async Task<ActionResult<Usuario>> ValidarUsuario([FromQuery] string correo, [FromQuery] string clave)
+        //{
+        //    var usuario = await _usuarioService.ValidarUsuarioAsync(correo, clave);
+        //    if (usuario == null)
+        //    {
+        //        return Unauthorized(); 
+        //    }
+        //    return Ok(usuario); 
+        //}
+
+        //[HttpPost("validar")]
+        //public async Task<ActionResult<Usuario>> ValidarUsuario([FromBody] Usuario login)
+        //{
+        //    var usuario = await _usuarioService.ValidarUsuarioAsync(login.Correo, login.Clave);
+        //    if (usuario == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+        //    return Ok(usuario);
+        //}
+
         [HttpPost("validar")]
-        public async Task<ActionResult<Usuario>> ValidarUsuario([FromQuery] string correo, [FromQuery] string clave)
+        public async Task<ActionResult<Usuario>> ValidarUsuario([FromBody] LoginViewModel login)
         {
-            var usuario = await _usuarioService.ValidarUsuarioAsync(correo, clave);
+            var usuario = await _usuarioService.ValidarUsuarioAsync(login.Correo, login.Clave);
             if (usuario == null)
             {
-                return Unauthorized(); 
+                return Unauthorized();
             }
-            return Ok(usuario); 
+            return Ok(usuario);
         }
-
 
         [HttpPost]
         public async Task<ActionResult> CrearUsuario([FromBody] Usuario usuario)
