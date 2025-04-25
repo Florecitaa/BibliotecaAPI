@@ -9,7 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace BibliotecaAPI.Controllers
 {
     [ApiController]
-    [Route("api/Libros")]
+    [Route("api/[controller]")]
     public class LibrosController : Controller
     {
         private readonly Services.LibroService _libroService;
@@ -52,6 +52,7 @@ namespace BibliotecaAPI.Controllers
 
         }
 
+        [HttpDelete("{id}")]
         public async Task<ActionResult> EliminarLibro(int id)
         {
             var resultado = await _libroService.EliminarLibroAsync(id);

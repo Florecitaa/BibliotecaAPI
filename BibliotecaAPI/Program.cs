@@ -1,21 +1,25 @@
+using BibliotecaAPI.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Servicios
+// 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Biblioteca API", Version = "v1" });
 });
-builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
+
+builder.Services.AddScoped<LibroService>();
 
 var app = builder.Build();
 
 // Middlewares
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

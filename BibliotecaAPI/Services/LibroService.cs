@@ -93,7 +93,7 @@ namespace BibliotecaAPI.Services
                 }
 
             }
-            return libro;
+            return new List<Libro> { libro };
 
         }
 
@@ -106,7 +106,8 @@ namespace BibliotecaAPI.Services
                 using (SqlCommand cmd = new SqlCommand("InsertarLibro", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", libro.Id);
+                    
+                    cmd.Parameters.AddWithValue("@Titulo", libro.Titulo);
                     cmd.Parameters.AddWithValue("@Autor", libro.Autor);
                     cmd.Parameters.AddWithValue("@Editorial", libro.Editorial);
                     cmd.Parameters.AddWithValue("@ISBN",libro.ISBN);
@@ -131,6 +132,7 @@ namespace BibliotecaAPI.Services
                   
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Id", libro.Id);
+                    cmd.Parameters.AddWithValue("@Titulo", libro.Titulo);
                     cmd.Parameters.AddWithValue("@Autor", libro.Autor);
                     cmd.Parameters.AddWithValue("@Editorial", libro.Editorial);
                     cmd.Parameters.AddWithValue("@ISBN", libro.ISBN);
