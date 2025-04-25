@@ -9,12 +9,12 @@ using System.Reflection.Metadata.Ecma335;
 namespace BibliotecaAPI.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
-    public class LibroController : Controller
+    [Route("api/Libros")]
+    public class LibrosController : Controller
     {
         private readonly Services.LibroService _libroService;
 
-        public LibroController(Services.LibroService libroService)
+        public LibrosController(Services.LibroService libroService)
         {
             _libroService = libroService;
         }
