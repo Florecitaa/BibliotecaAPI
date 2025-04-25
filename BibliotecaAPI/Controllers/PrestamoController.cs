@@ -1,0 +1,54 @@
+﻿using BibliotecaAPI.Models;
+using BibliotecaAPI.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BibliotecaAPI.Controllers
+{
+    public class PrestamoController : Controller
+    {
+        private readonly PrestamoService _prestamoService;
+
+        public PrestamoController(PrestamoService prestamoService)
+        {
+            _prestamoService = prestamoService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Prestamo>>> ObtenerPrestamos()
+        {
+            var prestamos = await _prestamoService.ObtenerPrestamosAsync();
+            return Ok(prestamos);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RegistrarPrestamo([FromBody] Prestamo prestamo)
+        {
+            await _prestamoService.RegistrarPrestamoAsync(prestamo);
+            return CreatedAtAction(nameof(ObtenerPrestamos), new { id = prestamo.Id }, prestamo);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> ActualizarPrestamo(int id, [FromBody] Prestamo prestamo)
+        {
+            var actualizado = await _prestamoService.ActualizarPrestamoAsync(id, prestamo);
+            if (!actualizado)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> EliminarPrestamo(int id)
+        {
+            var eliminado = await _prestamoService.EliminarPrestamoAsync(id);
+            if (!eliminado)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+
+    }
+}

@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen(c =>
 
 
 builder.Services.AddScoped<LibroService>();
+builder.Services.AddScoped<PrestamoService>();
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 

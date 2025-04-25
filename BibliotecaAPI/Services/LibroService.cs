@@ -52,7 +52,7 @@ namespace BibliotecaAPI.Services
             return libros;
         }
 
-        public async Task<List<Models.Libro>> ObtenerLibroPorIdAsync(int id)
+        public async Task<Models.Libro?> ObtenerLibroPorIdAsync(int id)
         {
             Models.Libro libro = null;
             using (SqlConnection con = new SqlConnection(_connectionString)) {
@@ -93,7 +93,7 @@ namespace BibliotecaAPI.Services
                 }
 
             }
-            return new List<Libro> { libro };
+            return libro;
 
         }
 
