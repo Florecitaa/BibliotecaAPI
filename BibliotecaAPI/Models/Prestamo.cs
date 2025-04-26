@@ -1,7 +1,7 @@
 ﻿namespace BibliotecaAPI.Models
 {
     public class Prestamo
-    {
+    {  ////modelo de prestamo segun la tabla de la base de datos 
         public int Id { get; set; }
         public int IdUsuario { get; set; }
         public int IdLibro { get; set; }

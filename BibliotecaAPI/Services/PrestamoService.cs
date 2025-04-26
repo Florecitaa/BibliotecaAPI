@@ -9,14 +9,14 @@ namespace BibliotecaAPI.Services
 {
     public class PrestamoService : Controller
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString; // Guarda la información necesaria para conectarnos a nuestra base de datos.
         public PrestamoService(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("MiConexion");
 
 
         }
-        public async Task<List<Prestamo>> ObtenerPrestamosAsync()
+        public async Task<List<Prestamo>> ObtenerPrestamosAsync() //Aqui imprime todos los prestamos que existen en la base de datos
         {
             var prestamos = new List<Prestamo>();
 
@@ -46,16 +46,16 @@ namespace BibliotecaAPI.Services
                 }
             }
 
-            return prestamos;
+            return prestamos; //imprime los prestamos 
         }
 
-        public async Task RegistrarPrestamoAsync(Prestamo prestamo)
+        public async Task RegistrarPrestamoAsync(Prestamo prestamo) //Aqui se puede registrar un nuevo prestamo 
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("RegistrarPrestamo", con))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure; //registra segun estos parametros y utiliza un proceso almacenado de la base de datos
                     cmd.Parameters.AddWithValue("@IdUsuario", prestamo.IdUsuario);
                     cmd.Parameters.AddWithValue("@IdLibro", prestamo.IdLibro);
                     cmd.Parameters.AddWithValue("@FechaDevolucionEsperada", prestamo.FechaDevolucionEsperada);
@@ -66,13 +66,13 @@ namespace BibliotecaAPI.Services
                 }
             }
         }
-        public async Task<bool> ActualizarPrestamoAsync(int id, Prestamo prestamo)
+        public async Task<bool> ActualizarPrestamoAsync(int id, Prestamo prestamo) //Aqui se logran actualizar los datos del prestamo
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("ActualizarPrestamo", con))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure;//utiliza un proceso almacenado de la base de datos
                     cmd.Parameters.AddWithValue("@Id", id);
                     cmd.Parameters.AddWithValue("@FechaDevolucionReal", prestamo.FechaDevolucionReal);
                     cmd.Parameters.AddWithValue("@Estado", prestamo.Estado);

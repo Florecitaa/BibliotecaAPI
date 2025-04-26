@@ -1,4 +1,4 @@
-using BibliotecaAPI.Services;
+using BibliotecaAPI.Services; //se estan usando los servicios de el api
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddScoped<LibroService>();
+builder.Services.AddScoped<LibroService>(); //aqui se registran los servicios
 builder.Services.AddScoped<PrestamoService>();
 builder.Services.AddScoped<UsuarioService>();
 

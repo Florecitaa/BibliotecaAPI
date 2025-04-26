@@ -5,10 +5,10 @@ using System.Data.SqlClient;
 using BibliotecaAPI.Services;
 
 namespace BibliotecaAPI.Services
-{
+{ // Esta clase, 'LibroService', es la que se encarga de toda la lógica relacionada con los libros
     public class LibroService
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString; // Guarda la información necesaria para conectarnos a nuestra base de datos.
         public LibroService(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("MiConexion");
@@ -17,7 +17,7 @@ namespace BibliotecaAPI.Services
         }
 
 
-        public async Task<List<Models.Libro>> ObtenerLibrosAsync()
+        public async Task<List<Models.Libro>> ObtenerLibrosAsync() //Este método va a la base de datos y trae todos los libros que encuentre.
         {
             var libros = new List<Models.Libro>();
             using (SqlConnection con = new SqlConnection(_connectionString))
@@ -52,6 +52,8 @@ namespace BibliotecaAPI.Services
             return libros;
         }
 
+        //  // Este método busca un libro específico por su ID en la base de datos.
+        // El '?' en 'Models.Libro' es por que podría devolver un libro o nada (null).
         public async Task<Models.Libro?> ObtenerLibroPorIdAsync(int id)
         {
             Models.Libro libro = null;
@@ -97,7 +99,7 @@ namespace BibliotecaAPI.Services
 
         }
 
-
+        // Este método toma un objeto 'Libro' y lo guarda en la base de datos
         public async Task CrearLibroAsync(Models.Libro libro)
         {
             using (SqlConnection con = new SqlConnection(_connectionString))
@@ -121,7 +123,7 @@ namespace BibliotecaAPI.Services
 
             }
         }
-
+        //actualiza el libro ya que reescribe los parametros 
         public async Task<bool> ActualizarLibroAsync(int id, Models.Libro libro)
         {
             using (SqlConnection con = new SqlConnection(_connectionString))

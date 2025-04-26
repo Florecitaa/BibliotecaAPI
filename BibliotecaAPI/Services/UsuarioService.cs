@@ -7,7 +7,7 @@ namespace BibliotecaAPI.Services
 {
     public class UsuarioService : Controller
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString; // Guarda la información necesaria para conectarnos a nuestra base de datos.
         public UsuarioService(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("MiConexion");
@@ -175,6 +175,8 @@ namespace BibliotecaAPI.Services
 
             return usuario; 
         }
+
+
 
 
 
